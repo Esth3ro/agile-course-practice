@@ -1,0 +1,3 @@
+dependencies {
+    compile project(':rb-tree-Model')
+}

@@ -311,6 +311,10 @@ project(":code/quadratic-equation-solver/Infrastructure").name = "quadratic-equa
 // Podchishchaeva Mariya, Vladislav Ryabov RBTree
 include "code/rb-tree/Model"
 project(":code/rb-tree/Model").name = "rb-tree-Model"
+include "code/rb-tree/View"
+project(":code/rb-tree/View").name = "rb-tree-View"
+include "code/rb-tree/ViewModel"
+project(":code/rb-tree/ViewModel").name = "rb-tree-ViewModel"
 
 // Converter From Celsius: Golovanova Tatyana, Shiryaeva Ekaterina, Kochuev Andrey
 include "code/converter-temperatures/Model"
