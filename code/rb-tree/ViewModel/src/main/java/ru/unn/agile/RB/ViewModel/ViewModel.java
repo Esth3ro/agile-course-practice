@@ -1,5 +1,7 @@
 package ru.unn.agile.RB.ViewModel;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ru.unn.agile.RB.Model.RBNode;
@@ -19,19 +21,18 @@ public class ViewModel {
             this.name = name;
         }
 
+        @Override
         public String toString() {
             return name;
         }
-
-
     }
 
     public void actionInsert() {
         try {
             tree.insert(Integer.parseInt(key.get()), value.get());
-            status = Status.SUCCESS;
+            status.setValue(Status.SUCCESS);
         } catch (NumberFormatException e) {
-            status = Status.BAD_KEY_FORMAT;
+            status.setValue(Status.BAD_KEY_FORMAT);
         }
     }
 
@@ -40,13 +41,14 @@ public class ViewModel {
         RBNode<Integer, String> found = tree.find(Integer.parseInt(key.get()));
 
         if (found != null) {
-            status = Status.SUCCESS;
+            valueProperty().setValue(found.getVal());
+            status.setValue(Status.SUCCESS);
         } else {
-            status = Status.NOT_FOUND;
+            status.setValue(Status.NOT_FOUND);
         }
 
         } catch (NumberFormatException e) {
-            status = Status.BAD_KEY_FORMAT;
+            status.setValue(Status.BAD_KEY_FORMAT);
         }
     }
 
@@ -58,13 +60,14 @@ public class ViewModel {
         return value;
     }
 
-    public Status status() {
+    public ObjectProperty<Status> statusProperty() {
         return status;
     }
 
     private final StringProperty value = new SimpleStringProperty("");
     private final StringProperty key   = new SimpleStringProperty("");
-    private Status status = Status.WAITING_FOR_INPUT;
+    private final ObjectProperty<Status> status
+            = new SimpleObjectProperty<>(Status.WAITING_FOR_INPUT);
 
     private final RBTree<Integer, String> tree = new RBTree<>();
 }

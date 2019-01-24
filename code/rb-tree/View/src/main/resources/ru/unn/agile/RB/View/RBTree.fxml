@@ -3,15 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
+<?import ru.unn.agile.RB.ViewModel.*?>
 
 <AnchorPane prefHeight="102.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.RB.View.RBTree">
+   <fx:define>
+      <ViewModel fx:id="viewModel" />
+   </fx:define>
+
    <children>
-      <Button layoutX="312.0" layoutY="19.0" mnemonicParsing="false" text="Insert" />
-      <Button layoutX="311.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Find" />
-      <TextField layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="83.0" />
-      <TextField layoutX="107.0" layoutY="20.0" prefHeight="25.0" prefWidth="197.0" />
-      <Label layoutX="20.0" layoutY="59.0" text="Result:" />
-      <Label layoutX="74.0" layoutY="59.0" prefHeight="15.0" prefWidth="223.0" />
+      <Button fx:id="performInsertion" layoutX="312.0" layoutY="19.0" mnemonicParsing="false" text="Insert" />
+      <Button fx:id="performFind" layoutX="311.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Find" />
+      <TextField fx:id="key" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="83.0" />
+      <TextField fx:id="value" layoutX="107.0" layoutY="20.0" prefHeight="25.0" prefWidth="197.0" />
+      <Label fx:id="status" layoutX="15.0" layoutY="59.0" prefHeight="15.0" prefWidth="290.0" />
    </children>
 </AnchorPane>
