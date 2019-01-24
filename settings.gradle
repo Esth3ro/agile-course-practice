@@ -308,9 +308,13 @@ project(":code/quadratic-equation-solver/View").name = "quadratic-equation-solve
 include "code/quadratic-equation-solver/Infrastructure"
 project(":code/quadratic-equation-solver/Infrastructure").name = "quadratic-equation-solver-Infrastructure"
 
-// Podchishchaeva Mariya, RBTree
-include "code/podchishchaeva-rb-tree"
-project(":code/podchishchaeva-rb-tree").name = "podchishchaeva-rb-tree"
+// Podchishchaeva Mariya, Vladislav Ryabov RBTree
+include "code/rb-tree/Model"
+project(":code/rb-tree/Model").name = "rb-tree-Model"
+include "code/rb-tree/View"
+project(":code/rb-tree/View").name = "rb-tree-View"
+include "code/rb-tree/ViewModel"
+project(":code/rb-tree/ViewModel").name = "rb-tree-ViewModel"
 
 // Converter From Celsius: Golovanova Tatyana, Shiryaeva Ekaterina, Kochuev Andrey
 include "code/converter-temperatures/Model"
