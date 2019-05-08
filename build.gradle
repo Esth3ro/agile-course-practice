@@ -153,7 +153,7 @@ subprojects {
             }
         } else if (task.name == 'jacocoTestReport'
                 && state.getExecuted() && state.getSkipped()
-                && task.getProject().getName() != 'agile-course-practice') {
+                && task.getProject().getName() != 'agile-course-practice-2018') {
             println '[**************** \\(°□°)/ ****************]'
             throw new RuntimeException("Cannot proceed w/o test report!")
         } else if (task.name == 'jacocoRootReport' && state.failure) {
