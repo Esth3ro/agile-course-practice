@@ -4,7 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class ViewModelTests {
 
@@ -89,5 +91,74 @@ public class ViewModelTests {
         viewModel.valueProperty().setValue("");
         viewModel.actionFind();
         assertEquals("asdasd", viewModel.valueProperty().get());
+    }
+
+    private void assertLogLastMessage(final String msg) {
+        List<String> logger = viewModel.getLogger().getLog();
+        assertFalse(logger.isEmpty());
+        assertEquals(msg, logger.get(logger.size() - 1));
+    }
+
+    @Test
+    public void logIsInitialized() {
+        assertNotNull(viewModel.getLogger());
+    }
+
+    @Test
+    public void logIsEmptyAtTheStart() {
+        assertTrue(viewModel.getLogger().getLog().isEmpty());
+    }
+
+    @Test
+    public void logRecordsInsertionEqualFields() {
+        viewModel.keyProperty().setValue("1");
+        viewModel.valueProperty().setValue("1");
+        viewModel.actionInsert();
+        assertLogLastMessage(ViewModel.LoggerMessages.INSERTION_SUCCESSFUL.toString("1", "1"));
+    }
+
+    @Test
+    public void logRecordsInsertionDifferentFields() {
+        viewModel.keyProperty().setValue("1");
+        viewModel.valueProperty().setValue("a");
+        viewModel.actionInsert();
+        assertLogLastMessage(ViewModel.LoggerMessages.INSERTION_SUCCESSFUL.toString("1", "a"));
+    }
+
+    @Test
+    public void logRecordsInsertingBadKeyFormat() {
+        viewModel.keyProperty().setValue("      789");
+        viewModel.valueProperty().setValue("");
+        viewModel.actionInsert();
+        assertLogLastMessage(ViewModel.LoggerMessages.BAD_KEY_FORMAT.toString("      789"));
+    }
+
+    @Test
+    public void logRecordsFindingBadKeyFormat() {
+        viewModel.keyProperty().setValue("123");
+        viewModel.valueProperty().setValue("");
+        viewModel.actionInsert();
+        viewModel.keyProperty().setValue("    1");
+        viewModel.actionFind();
+        assertLogLastMessage(ViewModel.LoggerMessages.BAD_KEY_FORMAT.toString("    1"));
+    }
+
+    @Test
+    public void logRecordsNodeNotFound() {
+        viewModel.keyProperty().setValue("123");
+        viewModel.valueProperty().setValue("");
+        viewModel.actionInsert();
+        viewModel.keyProperty().setValue("1");
+        viewModel.actionFind();
+        assertLogLastMessage(ViewModel.LoggerMessages.KEY_NOT_FOUND.toString("1"));
+    }
+
+    @Test
+    public void logRecordsFindANode() {
+        viewModel.keyProperty().setValue("789");
+        viewModel.valueProperty().setValue("xyz");
+        viewModel.actionInsert();
+        viewModel.actionFind();
+        assertLogLastMessage(ViewModel.LoggerMessages.KEY_FOUND.toString("789", "xyz"));
     }
 }
