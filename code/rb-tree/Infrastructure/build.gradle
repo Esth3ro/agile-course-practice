@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':rb-tree-ViewModel')
+    testCompile project(':rb-tree-ViewModel').sourceSets.test.output
+}
+
