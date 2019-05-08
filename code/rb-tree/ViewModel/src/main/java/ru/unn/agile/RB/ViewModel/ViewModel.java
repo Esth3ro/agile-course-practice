@@ -26,12 +26,40 @@ public class ViewModel {
 
     }
 
+    enum LoggerMessages {
+        INSERTION_SUCCESSFUL("was inserted successfully"),
+        KEY_FOUND("was found successfully."),
+        KEY_NOT_FOUND("is not in the tree!"),
+        BAD_KEY_FORMAT("cannot be parsed to Integer");
+
+        private final String msg;
+
+        LoggerMessages(final String msg) {
+            this.msg  = msg;
+        }
+
+        @Override
+        public String toString() {
+            return this.msg;
+        }
+
+        public String toString(final String key) {
+            return key + " " + this.msg;
+        }
+
+        public String toString(final String key, final String value) {
+            return "[" +  key + ":" + value + "] " + this.msg;
+        }
+    }
+
     public void actionInsert() {
         try {
             tree.insert(Integer.parseInt(key.get()), value.get());
             status.setValue(Status.SUCCESS);
+            this.log(LoggerMessages.INSERTION_SUCCESSFUL.toString(key.get(), value.get()));
         } catch (NumberFormatException e) {
             status.setValue(Status.BAD_KEY_FORMAT);
+            this.log(LoggerMessages.BAD_KEY_FORMAT.toString(key.get()));
         }
     }
 
@@ -42,12 +70,15 @@ public class ViewModel {
         if (found != null) {
             valueProperty().setValue(found.getVal());
             status.setValue(Status.SUCCESS);
+            this.log(LoggerMessages.KEY_FOUND.toString(key.get(), found.getVal()));
         } else {
             status.setValue(Status.NOT_FOUND);
+            this.log(LoggerMessages.KEY_NOT_FOUND.toString(key.get()));
         }
 
         } catch (NumberFormatException e) {
             status.setValue(Status.BAD_KEY_FORMAT);
+            this.log(LoggerMessages.BAD_KEY_FORMAT.toString(key.get()));
         }
     }
 
