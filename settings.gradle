@@ -315,6 +315,8 @@ include "code/rb-tree/View"
 project(":code/rb-tree/View").name = "rb-tree-View"
 include "code/rb-tree/ViewModel"
 project(":code/rb-tree/ViewModel").name = "rb-tree-ViewModel"
+include "code/rb-tree/Infrastructure"
+project(":code/rb-tree/Infrastructure").name = "rb-tree-Infrastructure"
 
 // Converter From Celsius: Golovanova Tatyana, Shiryaeva Ekaterina, Kochuev Andrey
 include "code/converter-temperatures/Model"
