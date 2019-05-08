@@ -1,5 +1,6 @@
 package ru.unn.agile.RB.Infrastructure;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +15,11 @@ public class TxtLoggerTests {
     @Before
     public void setUp() {
         logger = new TxtLogger("./RBTree-TxtLoggerTest.log");
+    }
+
+    @After
+    public void tearDown() {
+        logger = null;
     }
 
     @Test
