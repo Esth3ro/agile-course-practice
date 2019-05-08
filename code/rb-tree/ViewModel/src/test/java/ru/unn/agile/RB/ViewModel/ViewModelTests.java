@@ -13,6 +13,7 @@ public class ViewModelTests {
     @Before
     public void setUp() {
         viewModel = new ViewModel();
+        viewModel.setLogger(new FakeLogger());
     }
 
     @After

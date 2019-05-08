@@ -16,5 +16,14 @@
       <TextField fx:id="key" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="83.0" />
       <TextField fx:id="value" layoutX="107.0" layoutY="20.0" prefHeight="25.0" prefWidth="197.0" />
       <Label fx:id="status" layoutX="15.0" layoutY="59.0" prefHeight="15.0" prefWidth="290.0" />
+      <ScrollPane layoutX="-1.0" layoutY="102.0" prefHeight="200.0" prefWidth="379.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="outputWindowLog" prefHeight="200.0" prefWidth="363.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

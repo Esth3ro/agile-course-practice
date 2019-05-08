@@ -1,9 +1,7 @@
 package ru.unn.agile.RB.ViewModel;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import ru.unn.agile.RB.Model.RBNode;
 import ru.unn.agile.RB.Model.RBTree;
 
@@ -25,6 +23,7 @@ public class ViewModel {
         public String toString() {
             return name;
         }
+
     }
 
     public void actionInsert() {
@@ -64,10 +63,30 @@ public class ViewModel {
         return status;
     }
 
+    public ILogger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(final ILogger logger) {
+        this.logger = logger;
+    }
+
+    public ListProperty<String> outputWindowLoggerProperty() {
+        return outputWindowLogger;
+    }
+
+    private void log(final String str) {
+        if (logger != null) {
+            logger.log(str);
+            outputWindowLogger.setValue(FXCollections.observableArrayList(logger.getLog()));
+        }
+    }
+
     private final StringProperty value = new SimpleStringProperty("");
     private final StringProperty key   = new SimpleStringProperty("");
     private final ObjectProperty<Status> status
             = new SimpleObjectProperty<>(Status.WAITING_FOR_INPUT);
-
+    private final ListProperty<String> outputWindowLogger = new SimpleListProperty<>();
     private final RBTree<Integer, String> tree = new RBTree<>();
+    private ILogger logger = null;
 }
